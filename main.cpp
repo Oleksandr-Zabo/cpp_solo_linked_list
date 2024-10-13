@@ -173,6 +173,20 @@ public:
         return count > 0 ? count : -1; // Return -1 if no elements were replaced
     }
 
+    // Reverse the list
+    void Reverse() {
+        Node<T>* prev = nullptr;
+        Node<T>* current = head;
+        Node<T>* next = nullptr;
+        tail = head;
+        while (current != nullptr) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+    }
 
     ~LinkedList() {
         DeleteAll();
@@ -203,54 +217,67 @@ int main() {
         cout << "8. Delete at position" << endl;
         cout << "9. Search" << endl;
         cout << "10. Search and replace" << endl;
-        cout << "11. Exit" << endl;
+        cout << "11. Reverge the list" << endl;
+        cout << "12. Exit" << endl;
         cout << "Enter your choice: ";
 
         cin >> choice;
 
         switch (choice)
         {
-        case 1:
-            int value;
+        int value;
+        int position;
+
+        case 1: {
+            
             cout << "Enter value: ";
             cin >> value;
             list.AddToHead(value);
-            break;
-        case 2:
+        }break;
+
+        case 2: {
             cout << "Enter value: ";
             cin >> value;
             list.AddToTail(value);
-            break;
-        case 3:
+        }break;
+
+        case 3: {
             list.DeleteFromHead();
-            break;
-        case 4:
+        }break;
+
+        case 4: {
             list.DeleteFromTail();
-            break;
-        case 5:
+        } break;
+
+        case 5: {
             list.DeleteAll();
-            break;
-        case 6:
+        }break;
+
+        case 6: {
             list.Show();
-            break;
-        case 7:
-            int position;
+        }break;
+
+        case 7: {
+            
             cout << "Enter value: ";
             cin >> value;
             cout << "Enter position: ";
             cin >> position;
             list.InsertAtPosition(value, position);
-            break;
-        case 8:
+        }break;
+
+        case 8: {
             cout << "Enter position: ";
             cin >> position;
             list.DeleteAtPosition(position);
-            break;
-        case 9:
+        }break;
+
+        case 9: {
             cout << "Enter value: ";
             cin >> value;
             cout << "Position of " << value << ": " << list.Search(value) << endl;
-            break;
+        }break;
+
         case 10:
             int oldValue, newValue;
             cout << "Enter old value: ";
@@ -259,16 +286,23 @@ int main() {
             cin >> newValue;
             cout << "Replaced count: " << list.SearchAndReplace(oldValue, newValue) << endl;
             break;
-        case 11:
+
+        case 11: {
+            list.Reverse();
+        }break;
+
+        case 12: {
             exit(0);
-        default:
+        }break;
+
+        default: {
             cout << "Invalid choice" << endl;
-            break;
+        }break;
+
         }
 
         system("pause");
     } while (1);
-
 
     return 0;
 }
